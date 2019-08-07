@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
 import styled from 'styled-components';
 
 const Container = styled(View)`
@@ -14,6 +14,7 @@ const Container = styled(View)`
 export default function App() {
   return (
     <Container>
+      <StatusBar hidden={true} />
       <Text>Open up App.tsx to start working on your app!</Text>
     </Container>
   );
