@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StatusBar } from 'react-native';
+import { Text, View, StatusBar, Button } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import styled from 'styled-components';
 
@@ -12,20 +12,28 @@ const Container = styled(View)`
   width: 100%;
 `
 
-const HomeScreen = () => {
+const HomeScreen = (props) => {
   return (
   <Container>
     <StatusBar hidden={true}/>
     <Text>Welcome home</Text>
+    <Button
+      title="What time is it?"
+      onPress={() => props.navigation.navigate("Time")}
+    />
   </Container>
   )
 }
 
-const TimeScreen = () => {
+const TimeScreen = (props) => {
   return(
   <Container>
     <StatusBar hidden={true}/>
     <Text>The time is {Date.now()}</Text>
+    <Button
+      title="Ok great thanks"
+      onPress={() => props.navigation.navigate("Home")}
+    />
   </Container>
   )
 }
