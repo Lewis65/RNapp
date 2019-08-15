@@ -1,7 +1,7 @@
 import { combineReducers} from 'redux'
 
 const initialState = {
-    count: 0
+    value: 0
 }
 
 const countReducer = (state = initialState, action) => {

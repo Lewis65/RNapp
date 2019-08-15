@@ -1,21 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, StatusBar, Text } from "react-native";
+import { connect } from 'react-redux'
+
 import Container from './Container'
 
-const CountScreen = () => {
+class CountScreen extends React.Component<
+    {
+        count: {
+            value: number
+        }
+    }, {}> {
 
-    const [count, setCount] = useState(0)
-
-    return(
+    render() {
+        return(
         <Container>
             <StatusBar hidden={true}/>
-            <Text>You clicked {count} times. How fun.</Text>
+            <Text>You clicked {this.props.count.value} times but it doesn't change. How not-fun.</Text>
             <Button
-            title="Wheeee"
-            onPress={() => setCount(count + 1)}
+            title="Aww"
+            onPress = {() => {}}
             />
         </Container>
-    )
+        )
+    }
 }
 
-export default CountScreen
+const mapStateToProps = (state) => {
+    const { count } = state
+    return { count }
+}
+
+export default connect(mapStateToProps)(CountScreen)
