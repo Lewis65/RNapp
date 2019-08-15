@@ -3,6 +3,27 @@ import { Text, View, StatusBar, Button } from 'react-native';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import styled from 'styled-components';
 
+import { connect, Provider } from 'react-redux'
+import { createStore } from 'redux'
+import countReducer from './reducers/count'
+
+const store = createStore(countReducer)
+
+type AppState = {
+  count: number
+}
+
+class App extends React.Component<{}, AppState> {
+
+  public render() {
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    )
+  }
+}
+
 const Container = styled(View)`
   align-items: center;
   background-color: pink;
@@ -58,7 +79,7 @@ const TimeScreen = (props) => {
   )
 }
 
-const Navigator = createStackNavigator(
+const RootStack = createStackNavigator(
   {
     Count: {
       screen: CountScreen
@@ -75,4 +96,6 @@ const Navigator = createStackNavigator(
   }
 )
 
-export default createAppContainer(Navigator)
+const Navigation = createAppContainer(RootStack)
+
+export default App
