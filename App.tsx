@@ -3,7 +3,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
-import countReducer from './reducers/countReducer'
+import countReducer from './redux/reducers/countReducer'
 
 import CountScreen from './screens/CountScreen'
 import HomeScreen from './screens/HomeScreen'

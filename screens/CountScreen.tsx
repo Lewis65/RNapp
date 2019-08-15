@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, StatusBar, Text } from "react-native";
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { setCount } from '../actions/setCount'
+import { setCount } from '../redux/actions/setCount'
 
 import Container from './Container'
 
