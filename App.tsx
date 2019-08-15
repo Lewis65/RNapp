@@ -1,64 +1,32 @@
-import React, { useState } from 'react';
-import { Text, View, StatusBar, Button } from 'react-native';
+import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
-import styled from 'styled-components';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-const Container = styled(View)`
-  align-items: center;
-  background-color: pink;
-  display: flex;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-`
+import countReducer from './reducers/countReducer'
 
-const CountScreen = () => {
+import CountScreen from './screens/CountScreen'
+import HomeScreen from './screens/HomeScreen'
+import TimeScreen from './screens/TimeScreen'
 
-  const [count, setCount] = useState(0)
+const store = createStore(countReducer)
 
-  return(
-  <Container>
-    <StatusBar hidden={true}/>
-    <Text>You clicked {count} times. How fun.</Text>
-    <Button
-      title="Wheeee"
-      onPress={() => setCount(count + 1)}
-    />
-  </Container>
-  )
+type AppState = {
+  count: number
 }
 
-const HomeScreen = (props) => {
-  return (
-  <Container>
-    <StatusBar hidden={true}/>
-    <Text>Welcome home</Text>
-    <Button
-      title="What time is it?"
-      onPress={() => props.navigation.navigate("Time")}
-    />
-    <Button
-      title="Press butan"
-      onPress={() => props.navigation.navigate("Count")}
-    />
-  </Container>
-  )
+class App extends React.Component<{}, AppState> {
+
+  public render() {
+    return (
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    )
+  }
 }
 
-const TimeScreen = (props) => {
-  return(
-  <Container>
-    <StatusBar hidden={true}/>
-    <Text>The time is {Date.now()}</Text>
-    <Button
-      title="Ok great thanks"
-      onPress={() => props.navigation.navigate("Home")}
-    />
-  </Container>
-  )
-}
-
-const Navigator = createStackNavigator(
+const RootStack = createStackNavigator(
   {
     Count: {
       screen: CountScreen
@@ -75,4 +43,6 @@ const Navigator = createStackNavigator(
   }
 )
 
-export default createAppContainer(Navigator)
+const Navigation = createAppContainer(RootStack)
+
+export default App
