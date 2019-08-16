@@ -1,15 +1,15 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import countReducer from './reducers/countReducer'
+import configureStore from './redux/configureStore'
 
 import CountScreen from './screens/CountScreen'
 import HomeScreen from './screens/HomeScreen'
 import TimeScreen from './screens/TimeScreen'
 
-const store = createStore(countReducer)
+const { store, persistor } = configureStore()
 
 type AppState = {
   count: number
@@ -20,7 +20,9 @@ class App extends React.Component<{}, AppState> {
   public render() {
     return (
       <Provider store={store}>
-        <Navigation />
+        <PersistGate loading={null} persistor={persistor}>
+          <Navigation />
+        </PersistGate>
       </Provider>
     )
   }
